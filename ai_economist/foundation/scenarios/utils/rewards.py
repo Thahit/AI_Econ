@@ -48,6 +48,46 @@ def isoelastic_coin_minus_labor(
     return util
 
 
+def isoelastic_coin_minus_labor_env_equality(
+    coin_endowment, total_labor, isoelastic_eta, labor_coefficient, environment_coef, equality_coef, num_trees, equality
+):
+    """Agent utility, concave increasing in coin and linearly decreasing in labor.
+
+    Args:
+        coin_endowment (float, ndarray): The amount of coin owned by the agent(s).
+        total_labor (float, ndarray): The amount of labor performed by the agent(s).
+        isoelastic_eta (float): Constant describing the shape of the utility profile
+            with respect to coin endowment. Must be between 0 and 1. 0 yields utility
+            that increases linearly with coin. 1 yields utility that increases with
+            log(coin). Utility from coin uses:
+                https://en.wikipedia.org/wiki/Isoelastic_utility
+        labor_coefficient (float): Constant describing the disutility experienced per
+            unit of labor performed. Disutility from labor equals:
+                labor_coefficient * total_labor
+
+    Returns:
+        Agent utility (float) or utilities (ndarray).
+    """
+    assert np.all(coin_endowment >= 0)
+    assert 0 <= isoelastic_eta <= 1.0
+
+    # Utility from coin endowment
+    if isoelastic_eta == 1.0:  # dangerous
+        util_c = np.log(np.max(1, coin_endowment))
+    else:  # isoelastic_eta >= 0
+        util_c = (coin_endowment ** (1 - isoelastic_eta) - 1) / (1 - isoelastic_eta)
+
+    # disutility from labor
+    util_l = total_labor * labor_coefficient
+
+    # Net utility
+    util = util_c - util_l
+    
+    util += num_trees * environment_coef#happy because the env is good (nature)
+    util += equality_coef * equality# happy because all are equal
+    
+    return util
+
 def coin_minus_labor_cost(
     coin_endowment, total_labor, labor_exponent, labor_coefficient
 ):

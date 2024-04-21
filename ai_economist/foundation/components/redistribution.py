@@ -28,7 +28,7 @@ class WealthRedistribution(BaseComponent):
 
     name = "WealthRedistribution"
     required_entities = ["Coin"]
-    agent_subclasses = ["BasicMobileAgent"]
+    agent_subclasses = ["BasicMobileAgent", "HeteroMobileAgent"]
 
     """
     Required methods for implementing components
@@ -132,7 +132,7 @@ class PeriodicBracketTax(BaseComponent):
     name = "PeriodicBracketTax"
     component_type = "PeriodicTax"
     required_entities = ["Coin"]
-    agent_subclasses = ["BasicMobileAgent", "BasicPlanner"]
+    agent_subclasses = ["BasicMobileAgent", "BasicPlanner", "HeteroMobileAgent"]
 
     def __init__(
         self,

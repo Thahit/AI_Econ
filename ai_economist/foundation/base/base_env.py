@@ -179,6 +179,8 @@ class BaseEnvironment(ABC):
         self,
         components=None,
         n_agents=None,
+        env_weighting = None,# new
+        equ_weighting = None,
         world_size=None,
         episode_length=1000,
         multi_action_mode_agents=False,
@@ -190,6 +192,8 @@ class BaseEnvironment(ABC):
         world_dense_log_frequency=50,
         collate_agent_step_and_reset_data=False,
         seed=None,
+        mobile_agent_class = "BasicMobileAgent",#new
+        
     ):
 
         # Make sure a name was declared by child class
@@ -207,7 +211,26 @@ class BaseEnvironment(ABC):
                     a_i = agent_registry.get(self.agent_subclasses[i])
                     a_j = agent_registry.get(self.agent_subclasses[j])
                     assert not issubclass(a_i, a_j)
-
+        
+        
+        if env_weighting == None:
+            self.env_weighting = env_weighting
+        else:
+            assert isinstance(env_weighting, list)
+            assert len(env_weighting) == n_agents
+            self.env_weighting = env_weighting
+        
+        if env_weighting == None:
+            self.equ_weighting = equ_weighting
+        else:
+            assert isinstance(equ_weighting, list)
+            assert len(equ_weighting) == n_agents
+            self.equ_weighting = equ_weighting
+        
+        
+        self.mobile_agent_class = mobile_agent_class# could assert again
+        
+        
         # Make sure the required_entities was declared by child class
         # (will typecheck later)
         assert isinstance(self.required_entities, (tuple, list))
@@ -322,6 +345,9 @@ class BaseEnvironment(ABC):
             self.landmarks,
             self.multi_action_mode_agents,
             self.multi_action_mode_planner,
+            self.env_weighting,
+            self.mobile_agent_class,
+            self.equ_weighting,
         )
 
         # Initialize the component objects.

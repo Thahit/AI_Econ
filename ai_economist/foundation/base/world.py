@@ -57,6 +57,7 @@ class Maps:
         self._accessibility_lookup = {}
 
         for resource in self.resources:
+            print(resource)
             resource_cls = resource_registry.get(resource)
             if resource_cls.collectible:
                 self._maps[resource] = np.zeros(shape=self.size)
@@ -368,8 +369,12 @@ class World:
         world_landmarks,
         multi_action_mode_agents,
         multi_action_mode_planner,
+        env_weighting = None,# new
+        mobile_agent_class = "BasicMobileAgent",#new
+        equ_weighting = None,#new
     ):
         self.world_size = world_size
+        self.env_weighting = env_weighting
         self.n_agents = n_agents
         self.resources = world_resources
         self.landmarks = world_landmarks
@@ -377,12 +382,18 @@ class World:
         self.multi_action_mode_planner = bool(multi_action_mode_planner)
         self.maps = Maps(world_size, n_agents, world_resources, world_landmarks)
 
-        mobile_class = agent_registry.get("BasicMobileAgent")
+        mobile_class = agent_registry.get(mobile_agent_class)#HeteroMobileAgent
         planner_class = agent_registry.get("BasicPlanner")
-        self._agents = [
-            mobile_class(i, multi_action_mode=self.multi_action_mode_agents)
-            for i in range(self.n_agents)
-        ]
+        if mobile_agent_class != "HeteroMobileAgent":
+            self._agents = [
+                mobile_class(i, multi_action_mode=self.multi_action_mode_agents)
+                for i in range(self.n_agents)
+            ]
+        else:
+            self._agents = [
+                mobile_class(i, multi_action_mode=self.multi_action_mode_agents, env_weighting=env_weighting[i], equ_weighting=equ_weighting[i])
+                for i in range(self.n_agents)
+            ]
         self._planner = planner_class(multi_action_mode=self.multi_action_mode_planner)
 
         self.timestep = 0

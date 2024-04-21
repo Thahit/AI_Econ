@@ -37,7 +37,7 @@ class ContinuousDoubleAuction(BaseComponent):
     name = "ContinuousDoubleAuction"
     component_type = "Trade"
     required_entities = ["Coin", "Labor"]
-    agent_subclasses = ["BasicMobileAgent"]
+    agent_subclasses = ["BasicMobileAgent", "HeteroMobileAgent"]
 
     def __init__(
         self,
@@ -417,7 +417,7 @@ class ContinuousDoubleAuction(BaseComponent):
         """
         # This component adds 2*(1+max_bid_ask)*n_resources possible actions:
         # buy/sell x each-price x each-resource
-        if agent_cls_name == "BasicMobileAgent":
+        if agent_cls_name in ["BasicMobileAgent", "HeteroMobileAgent"]:
             trades = []
             for c in self.commodities:
                 trades.append(
@@ -456,6 +456,7 @@ class ContinuousDoubleAuction(BaseComponent):
                     self.name, "Buy_{}".format(resource)
                 )
 
+                
                 # No-op
                 if resource_action == 0:
                     pass

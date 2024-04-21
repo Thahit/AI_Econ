@@ -36,7 +36,7 @@ class Gather(BaseComponent):
 
     name = "Gather"
     required_entities = ["Coin", "House", "Labor"]
-    agent_subclasses = ["BasicMobileAgent"]
+    agent_subclasses = ["BasicMobileAgent", "HeteroMobileAgent"]
 
     def __init__(
         self,
@@ -74,7 +74,7 @@ class Gather(BaseComponent):
         """
         # This component adds 4 action that agents can take:
         # move up, down, left, or right
-        if agent_cls_name == "BasicMobileAgent":
+        if agent_cls_name in ["BasicMobileAgent", "HeteroMobileAgent"]:#need actions for new agent too
             return 4
         return None
 
@@ -86,7 +86,7 @@ class Gather(BaseComponent):
         """
         if agent_cls_name not in self.agent_subclasses:
             return {}
-        if agent_cls_name == "BasicMobileAgent":
+        if agent_cls_name in ["BasicMobileAgent", "HeteroMobileAgent"]:
             return {"bonus_gather_prob": 0.0}
         raise NotImplementedError
 

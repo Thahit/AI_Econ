@@ -36,7 +36,7 @@ class Build(BaseComponent):
     name = "Build"
     component_type = "Build"
     required_entities = ["Wood", "Stone", "Coin", "House", "Labor"]
-    agent_subclasses = ["BasicMobileAgent"]
+    agent_subclasses =  ["BasicMobileAgent", "HeteroMobileAgent"]
 
     def __init__(
         self,
@@ -92,7 +92,7 @@ class Build(BaseComponent):
         Add a single action (build) for mobile agents.
         """
         # This component adds 1 action that mobile agents can take: build a house
-        if agent_cls_name == "BasicMobileAgent":
+        if agent_cls_name in ["BasicMobileAgent", "HeteroMobileAgent"]:
             return 1
 
         return None
@@ -105,7 +105,7 @@ class Build(BaseComponent):
         """
         if agent_cls_name not in self.agent_subclasses:
             return {}
-        if agent_cls_name == "BasicMobileAgent":
+        if agent_cls_name in ["BasicMobileAgent", "HeteroMobileAgent"]:
             return {"build_payment": float(self.payment), "build_skill": 1}
         raise NotImplementedError
 

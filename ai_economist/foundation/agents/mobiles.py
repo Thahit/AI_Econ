@@ -16,3 +16,17 @@ class BasicMobileAgent(BaseAgent):
     """
 
     name = "BasicMobileAgent"
+
+@agent_registry.add
+class HeteroMobileAgent(BaseAgent):
+    """
+    A basic mobile agent represents an individual actor in the economic simulation.
+
+    "Mobile" refers to agents of this type being able to move around in the 2D world.
+    """
+
+    name = "HeteroMobileAgent"
+    def __init__(self, idx=None, multi_action_mode=None, env_weighting=0, equ_weighting=0):
+        super().__init__(idx, multi_action_mode)
+        self.env_weighting = env_weighting
+        self.equality = equ_weighting

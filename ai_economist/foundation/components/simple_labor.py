@@ -39,7 +39,7 @@ class SimpleLabor(BaseComponent):
 
     name = "SimpleLabor"
     required_entities = ["Coin"]
-    agent_subclasses = ["BasicMobileAgent"]
+    agent_subclasses = ["BasicMobileAgent", "HeteroMobileAgent"]
 
     def __init__(
         self,
@@ -80,7 +80,7 @@ class SimpleLabor(BaseComponent):
         self.skills = sorted_clipped_skills.mean(axis=0)
 
     def get_additional_state_fields(self, agent_cls_name):
-        if agent_cls_name == "BasicMobileAgent":
+        if agent_cls_name in ["BasicMobileAgent", "HeteroMobileAgent"]:
             return {"skill": 0, "production": 0}
         return {}
 
@@ -90,7 +90,7 @@ class SimpleLabor(BaseComponent):
             agent.state["skill"] = self.skills[agent.idx]
 
     def get_n_actions(self, agent_cls_name):
-        if agent_cls_name == "BasicMobileAgent":
+        if agent_cls_name in ["BasicMobileAgent", "HeteroMobileAgent"]:
             return self.num_labor_hours
         return None
 
