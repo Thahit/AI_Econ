@@ -286,15 +286,15 @@ class HeteroLayoutFromFile(BaseEnvironment):
         
         for agent in self.world.agents:
             
-            curr_optimization_metric[agent.idx] = rewards.isoelastic_coin_minus_labor(#_env_equalit
+            curr_optimization_metric[agent.idx] = rewards.isoelastic_coin_minus_labor_env_equality(#_env_equalit
                 coin_endowment=agent.total_endowment("Coin"),
                 total_labor=agent.state["endogenous"]["Labor"],
                 isoelastic_eta=self.isoelastic_eta,
                 labor_coefficient=self.energy_weight * self.energy_cost,
-                #environment_coef = agent.equality,
-                #equality_coef = agent.env_weighting,
-                #num_trees = tree_count, 
-                #equality = equality,
+                environment_coef = agent.equality,
+                equality_coef = agent.env_weighting,
+                num_trees = tree_count, 
+                equality = equality,
             )
         # (for the planner)
         if self.planner_reward_type == "coin_eq_times_productivity":
