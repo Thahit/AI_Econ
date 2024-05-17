@@ -1,0 +1,48 @@
+date: 2024-05-05_06-39-38
+done: false
+episode_len_mean: 1000.0
+episode_reward_max: -2.685556055071155
+episode_reward_mean: -25.069173311901345
+episode_reward_min: -46.607057817111304
+episodes_this_iter: 30
+episodes_total: 930
+experiment_id: 0e614256b1a446f58b94fea90e1202c2
+hostname: wks
+info:
+  grad_time_ms: 989.981
+  load_time_ms: 357.211
+  num_steps_sampled: 930000
+  num_steps_trained: 930000
+  sample_time_ms: 1739.208
+  update_time_ms: 8.427
+iterations_since_restore: 150
+node_ip: 129.132.112.254
+num_healthy_workers: 15
+off_policy_estimator: {}
+perf:
+  cpu_util_percent: 40.325
+  gpu_util_percent0: 0.0
+  ram_util_percent: 30.224999999999998
+  vram_util_percent0: 0.007775606578733106
+pid: 121304
+policy_reward_max:
+  a: 18.75407431629114
+  p: 6.319894974369561
+policy_reward_mean:
+  a: -6.815410242316914
+  p: 2.1924676573663073
+policy_reward_min:
+  a: -18.411311277978825
+  p: 0.16930932367821108
+sampler_perf:
+  mean_env_wait_ms: 3.035525652164472
+  mean_inference_ms: 3.9378229986819595
+  mean_processing_ms: 1.1353121213581412
+time_since_restore: 476.3877217769623
+time_this_iter_s: 2.9818100929260254
+time_total_s: 504.89678168296814
+timestamp: 1714883978
+timesteps_since_restore: 900000
+timesteps_this_iter: 6000
+timesteps_total: 930000
+training_iteration: 155

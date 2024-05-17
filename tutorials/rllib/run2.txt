@@ -1,0 +1,1024 @@
+Inside covid19_components.py: 1 GPUs are available.
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz
+Coin
+Stone
+Wood
+fasz
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+key: loc, item: [0, 0]
+key: inventory, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: escrow, item: {'Coin': 0, 'Stone': 0, 'Wood': 0}
+key: endogenous, item: {'Labor': 0}
+key: build_payment, item: 10.0
+key: build_skill, item: 1
+key: bonus_gather_prob, item: 0.0
+fasz

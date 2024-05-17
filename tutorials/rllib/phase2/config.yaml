@@ -52,8 +52,8 @@ env:
 general:
   ckpt_frequency_steps: 20000000
   cpus: 15
-  episodes: 4000000
-  gpus: 0
+  episodes: 1
+  gpus: 1
   restore_tf_weights_agents: phase1/ckpts/agent.tf.weights.global-step-25000000 # path to phase 1 agent policy checkpoint
   restore_tf_weights_planner: ''
   train_planner: true
@@ -134,7 +134,7 @@ trainer:
     allow_soft_placement: true
     device_count:
       CPU: 15
-      GPU: 0
+      GPU: 1
     gpu_options:
       allow_growth: true
     inter_op_parallelism_threads: 2
