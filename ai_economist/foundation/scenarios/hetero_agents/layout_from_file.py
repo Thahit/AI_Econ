@@ -276,25 +276,15 @@ class HeteroLayoutFromFile(BaseEnvironment):
         """
         curr_optimization_metric = {}
         # (for agents)
-        tree_count = np.sum(self.world.maps._maps["Wood"])
         
-        coin_endowments = np.array(
-            [agent.total_endowment("Coin") for agent in self.world.agents]
-        )
-
-        equality = social_metrics.get_equality(coin_endowments)
         
         for agent in self.world.agents:
             
-            curr_optimization_metric[agent.idx] = rewards.isoelastic_coin_minus_labor_env_equality(#_env_equalit
+            curr_optimization_metric[agent.idx] = rewards.isoelastic_coin_minus_labor(#_env_equalit
                 coin_endowment=agent.total_endowment("Coin"),
                 total_labor=agent.state["endogenous"]["Labor"],
                 isoelastic_eta=self.isoelastic_eta,
                 labor_coefficient=self.energy_weight * self.energy_cost,
-                environment_coef = agent.equality,
-                equality_coef = agent.env_weighting,
-                num_trees = tree_count, 
-                equality = equality,
             )
         # (for the planner)
         if self.planner_reward_type == "coin_eq_times_productivity":
@@ -553,11 +543,28 @@ class HeteroLayoutFromFile(BaseEnvironment):
         # compute current objectives and store the values
         self.curr_optimization_metric = self.get_current_optimization_metrics()
 
+        # extra reward
+        tree_count = np.sum(self.world.maps._maps["Wood"])
+        
+        coin_endowments = np.array(
+            [agent.total_endowment("Coin") for agent in self.world.agents]
+        )
+
+        equality = social_metrics.get_equality(coin_endowments)
+
+
         # reward = curr - prev objectives
         rew = {
             k: float(v - utility_at_end_of_last_time_step[k])
             for k, v in self.curr_optimization_metric.items()
         }
+        for i in range(self.n_agents):
+            curr_agent = self.world.agents[i]
+            rew[i] += tree_count * curr_agent.env_weighting + curr_agent.equality * equality
+
+        #util += num_trees * environment_coef#happy because the env is good (nature)
+        #util += equality_coef * equality# happy because all are equal
+
 
         # store the previous objective values
         self.prev_optimization_metric.update(utility_at_end_of_last_time_step)
