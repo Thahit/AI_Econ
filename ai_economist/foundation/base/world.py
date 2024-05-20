@@ -57,7 +57,6 @@ class Maps:
         self._accessibility_lookup = {}
 
         for resource in self.resources:
-            print(resource)
             resource_cls = resource_registry.get(resource)
             if resource_cls.collectible:
                 self._maps[resource] = np.zeros(shape=self.size)

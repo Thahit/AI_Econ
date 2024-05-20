@@ -9,7 +9,10 @@ import logging
 import os
 import sys
 import time
+import wandb
+import math
 
+import numpy as np
 import ray
 from utils import remote, saving
 import tf_models
@@ -32,6 +35,18 @@ def process_args():
         "--run-dir", type=str, help="Path to the directory for this run."
     )
 
+    parser.add_argument(
+        "--equw", type=float, help="Equality Weighting parameter (the same value will be set for all agents)", default=float('nan')
+    )
+
+    parser.add_argument(
+        "--envw", type=float, help="Environment Weighting parameter (the same value will be set for all agents)", default=float('nan')
+    )
+
+    parser.add_argument(
+        "--note", type=str, help="Hint to identify the given [wandb] run", default=""
+    )
+
     args = parser.parse_args()
     run_directory = args.run_dir
 
@@ -41,6 +56,12 @@ def process_args():
 
     with open(config_path, "r") as f:
         run_configuration = yaml.safe_load(f)
+
+    if not math.isnan(args.equw):
+        run_configuration['env']['equ_weighting'] = [args.equw] * int(run_configuration['env']['n_agents'])
+    if not math.isnan(args.envw):
+        run_configuration['env']['env_weighting'] = [args.envw] * int(run_configuration['env']['n_agents'])
+    run_configuration['note'] = args.note
 
     return run_directory, run_configuration
 
@@ -262,6 +283,27 @@ def maybe_save(trainer_obj, result_dict, ckpt_freq, ckpt_directory, trainer_step
 
     return trainer_step_last_ckpt
 
+def log_wandb(result):
+    wandb.log({
+        "episode_reward_min": result['episode_reward_min'],
+        "episode_reward_max": result['episode_reward_max'],
+        "episode_reward_mean": result['episode_reward_mean'],
+        "episode_len_mean": result['episode_len_mean'],
+        "policy_reward_min": result['policy_reward_min'],
+        "policy_reward_max": result['policy_reward_max'],
+        "policy_reward_mean": result['policy_reward_mean'],
+        "timesteps_total": result['timesteps_total'],
+        "episodes_total": result['episodes_total'],
+        "training_iteration": result['training_iteration'],
+        "equ_weighting": result['config']['env_config']['env_config_dict']['equ_weighting'][0],
+        "env_weighting": result['config']['env_config']['env_config_dict']['env_weighting'][0],
+        "metrics/num_steps_trained": result['info']['num_steps_trained'],
+        "metrics/num_steps_sampled": result['info']['num_steps_sampled'],
+        "metrics/sample_time_ms": result['info']['sample_time_ms'],
+        "metrics/load_time_ms": result['info']['load_time_ms'],
+        "metrics/grad_time_ms": result['info']['grad_time_ms'],
+        "metrics/update_time_ms": result['info']['update_time_ms'],
+    })
 
 if __name__ == "__main__":
 
@@ -271,9 +313,16 @@ if __name__ == "__main__":
 
     # Process the args
     run_dir, run_config = process_args()
+    wandb.init(project="forl-stackelberg", notes=run_config['note'])
 
     # Create a trainer object
     trainer = build_trainer(run_config)
+    env_init_log = dict()
+    for i, agent in enumerate(trainer.workers.local_worker().env.env.world.agents):
+        for k, v in  agent.state.items():
+            env_init_log[f'agent{i}/' + k] = v
+    
+    wandb.log(env_init_log)  
 
     # Set up directories for logging and saving. Restore if this has already been
     # done (indicating that we're restarting a crashed run). Or, if appropriate,
@@ -297,23 +346,12 @@ if __name__ == "__main__":
 
         # Training
         result = trainer.train()
+        log_wandb(result)
 
         # === Counters++ ===
         num_parallel_episodes_done = result["episodes_total"]
         global_step = result["timesteps_total"]
         curr_iter = result["training_iteration"]
-
-        logger.info(
-            "Iter %d: steps this-iter %d total %d -> %d/%d episodes done",
-            curr_iter,
-            result["timesteps_this_iter"],
-            global_step,
-            num_parallel_episodes_done,
-            run_config["general"]["episodes"],
-        )
-
-        if curr_iter == 1 or result["episodes_this_iter"] > 0:
-            logger.info(pretty_print(result))
 
         # === Saez logic ===
         maybe_sync_saez_buffer(trainer, result, run_config)
