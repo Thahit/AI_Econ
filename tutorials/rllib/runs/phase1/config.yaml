@@ -42,7 +42,7 @@ env:
   - PeriodicBracketTax:
       bracket_spacing: us-federal
       disable_taxes: true
-      period: 100
+      period: 250
       tax_annealing_schedule:
       - -100
       - 0.001
@@ -53,16 +53,14 @@ env:
   energy_warmup_method: auto
   env_layout_file: quadrant_25x25_20each_30clump.txt
   env_weighting:
-  - 0
-  - 1
-  - 0.2
-  - 0.4
-  episode_length: 1000
+  - 0.002
+  - 0.001
+  - -0.001
+  episode_length: 750
   equ_weighting:
-  - -2
-  - 2
-  - 4
-  - 8
+  - -0.04
+  - 0.01
+  - 0.08
   fixed_four_skill_and_loc: true
   flatten_masks: true
   flatten_observations: true
@@ -70,7 +68,7 @@ env:
   mobile_agent_class: HeteroMobileAgent
   multi_action_mode_agents: false
   multi_action_mode_planner: true
-  n_agents: 4
+  n_agents: 3
   planner_gets_spatial_info: false
   planner_reward_type: coin_eq_times_productivity
   scenario_name: layout_from_file/hetero_agents
@@ -81,7 +79,7 @@ env:
 general:
   ckpt_frequency_steps: 750000
   cpus: 10
-  episodes: 10
+  episodes: 31250
   gpus: 1
   restore_tf_weights_agents: ''
   restore_tf_weights_planner: ''
@@ -135,3 +133,5 @@ trainer:
     intra_op_parallelism_threads: 32
     log_device_placement: false
   train_batch_size: 3000
+  remote_worker_envs: False
+note: phase1
