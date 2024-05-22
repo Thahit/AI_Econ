@@ -6,7 +6,7 @@
 #SBATCH --job-name=FORL
 #SBATCH --output=log/debug.out
 #SBATCH --error=log/debug.err
-
+#SBATCH --time=4-20
 
 export SETUPTOOLS_USE_DISTUTILS=stdlib
 export LD_LIBRARY_PATH=/lib64:$LD_LIBRARY_PATH
@@ -15,4 +15,4 @@ module load gcc/6.3.0 python/3.6.6 eth_proxy
 source env/bin/activate
 
 cd ..
-python training_script.py --run-dir runs/phase1 --note euler_test
+python training_script.py --run-dir ../../../runs/2-constant --note constant-tax
