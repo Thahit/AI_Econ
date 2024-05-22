@@ -283,8 +283,8 @@ def maybe_save(trainer_obj, result_dict, ckpt_freq, ckpt_directory, trainer_step
 
     return trainer_step_last_ckpt
 
-def log_wandb(result):
-    wandb.log({
+def log_wandb(trainer, result):
+    log_dict = {
         "episode_reward_min": result['episode_reward_min'],
         "episode_reward_max": result['episode_reward_max'],
         "episode_reward_mean": result['episode_reward_mean'],
@@ -303,7 +303,17 @@ def log_wandb(result):
         "metrics/load_time_ms": result['info']['load_time_ms'],
         "metrics/grad_time_ms": result['info']['grad_time_ms'],
         "metrics/update_time_ms": result['info']['update_time_ms'],
-    })
+    }
+
+    for i, agent in enumerate(trainer.workers.local_worker().env.env.world.agents):
+        for k, v in  agent.state.items():
+            log_dict[f'agent{i}/' + k] = v
+
+    maps = trainer.workers.local_worker().env.env.world.maps
+    log_dict["num_houses"] = np.sum(maps.get("House"))
+    log_dict["num_trees"] = np.sum(maps.get("Wood"))
+
+    wandb.log(log_dict)
 
 if __name__ == "__main__":
 
