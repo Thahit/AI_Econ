@@ -1,5 +1,4 @@
 absl-py==1.4.0
--e git+ssh://git@github.com/Thahit/AI_Econ.git@c72c3e2dab25c9c9b45e8fc557a50013abff8e3a#egg=ai_economist
 aiohttp==3.8.6
 aiosignal==1.2.0
 appdirs==1.4.4
@@ -85,7 +84,6 @@ nest-asyncio==1.5.1
 notebook==6.4.1
 numpy==1.19.5
 oauthlib==3.2.2
-opencv-python==4.9.0.80
 opencv-python-headless==4.9.0.80
 openpyxl==3.0.7
 packaging==20.9
