@@ -322,7 +322,7 @@ if __name__ == "__main__":
         for k, v in  agent.state.items():
             env_init_log[f'agent{i}/' + k] = v
     
-    wandb.log(env_init_log)  
+    wandb.log(env_init_log)
 
     # Set up directories for logging and saving. Restore if this has already been
     # done (indicating that we're restarting a crashed run). Or, if appropriate,
@@ -341,6 +341,15 @@ if __name__ == "__main__":
     dense_log_frequency = run_config["env"].get("dense_log_frequency", 0)
     ckpt_frequency = run_config["general"].get("ckpt_frequency_steps", 0)
     global_step = int(step_last_ckpt)
+
+    if run_config["general"].get("actor_frozen", False):
+        policy1 = trainer.get_policy('a')
+
+        # Check and print the trainable status of each variable
+        with policy1.get_session().as_default():
+            for var in policy1.model.variables():
+                var._trainable = False
+        print("Follower frozen")
 
     while num_parallel_episodes_done < run_config["general"]["episodes"]:
 
