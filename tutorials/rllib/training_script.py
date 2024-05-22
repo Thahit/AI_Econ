@@ -365,7 +365,7 @@ if __name__ == "__main__":
 
         # Training
         result = trainer.train()
-        log_wandb(result)
+        log_wandb(trainer, result)
 
         # === Counters++ ===
         num_parallel_episodes_done = result["episodes_total"]
