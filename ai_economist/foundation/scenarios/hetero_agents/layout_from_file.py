@@ -81,6 +81,7 @@ class HeteroLayoutFromFile(BaseEnvironment):
         energy_warmup_method="decay",
         planner_reward_type="coin_eq_times_productivity",
         mixing_weight_gini_vs_coin=0.0,
+        #build_payment = None,
         **base_env_kwargs,
     ):
         super().__init__(*base_env_args, **base_env_kwargs)
@@ -190,6 +191,10 @@ class HeteroLayoutFromFile(BaseEnvironment):
             # i-th ranked samples throughout the batch.
             average_ranked_skills = sorted_clipped_skills.mean(axis=0)
             self._avg_ranked_skill = average_ranked_skills * bm.payment
+
+            #if not (build_payment is None):
+            #    # overwrite that,-> building skills fixed
+            #    self._avg_ranked_skill = build_payment
 
             np.random.set_state(seed_state)
 
@@ -800,7 +805,7 @@ class SplitLayout(HeteroLayoutFromFile):
                 r_min, r_max = 0, self._water_line
             else:
                 r_min, r_max = self._water_line + 1, self.world_size[0]
-
+            
             r = np.random.randint(r_min, r_max)
             c = np.random.randint(0, self.world_size[1])
             n_tries = 0

@@ -44,6 +44,7 @@ class Gather(BaseComponent):
         move_labor=1.0,
         collect_labor=1.0,
         skill_dist="none",
+        bonus_gather_prob = None,
         **base_component_kwargs
     ):
         super().__init__(*base_component_args, **base_component_kwargs)
@@ -57,6 +58,7 @@ class Gather(BaseComponent):
         self.skill_dist = skill_dist.lower()
         assert self.skill_dist in ["none", "pareto", "lognormal"]
 
+        self.bonus_gather_prob = bonus_gather_prob
         self.gathers = []
 
         self._aidx = np.arange(self.n_agents)[:, None].repeat(4, axis=1)
@@ -196,8 +198,10 @@ class Gather(BaseComponent):
 
         Re-sample agents' collection skills.
         """
-        for agent in self.world.agents:
-            if self.skill_dist == "none":
+        for i, agent in enumerate(self.world.agents):
+            if self.bonus_gather_prob != None:
+                bonus_rate=self.bonus_gather_prob[i]
+            elif self.skill_dist == "none":
                 bonus_rate = 0.0
             elif self.skill_dist == "pareto":
                 bonus_rate = np.minimum(2, np.random.pareto(3)) / 2

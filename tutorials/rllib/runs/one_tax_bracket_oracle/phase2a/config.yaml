@@ -1,3 +1,4 @@
+
 agent_policy:
   clip_param: 0.3
   entropy_coeff: 0.025
@@ -30,6 +31,14 @@ env:
       payment: 10
       payment_max_skill_multiplier: 3
       skill_dist: pareto
+      build_skill: #new
+      - .640
+      - .780
+      - .22
+      build_payment": #new
+      - 12.
+      - 21.
+      - 15.
   - ContinuousDoubleAuction:
       max_bid_ask: 10
       max_num_orders: 5
@@ -39,6 +48,10 @@ env:
       collect_labor: 1
       move_labor: 1
       skill_dist: pareto
+      bonus_gather_prob": #new
+      - .3
+      - .2
+      - .1
   - PeriodicBracketTax:
       bracket_spacing: us-federal
       disable_taxes: false
@@ -62,7 +75,7 @@ env:
   - -0.04
   - 0.01
   - 0.08
-  fixed_four_skill_and_loc: true
+  fixed_four_skill_and_loc: false #changed
   flatten_masks: true
   flatten_observations: true
   isoelastic_eta: 0.23

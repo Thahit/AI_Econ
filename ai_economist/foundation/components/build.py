@@ -45,6 +45,8 @@ class Build(BaseComponent):
         payment_max_skill_multiplier=1,
         skill_dist="none",
         build_labor=10.0,
+        build_skill=None,
+        build_payment=None,
         **base_component_kwargs
     ):
         super().__init__(*base_component_args, **base_component_kwargs)
@@ -54,7 +56,8 @@ class Build(BaseComponent):
 
         self.payment_max_skill_multiplier = int(payment_max_skill_multiplier)
         assert self.payment_max_skill_multiplier >= 1
-
+        self.build_skill = build_skill
+        self.build_payment = build_payment
         self.resource_cost = {"Wood": 1, "Stone": 1}
 
         self.build_labor = float(build_labor)
@@ -232,7 +235,6 @@ class Build(BaseComponent):
         self.sampled_skills = {agent.idx: 1 for agent in world.agents}
 
         PMSM = self.payment_max_skill_multiplier
-
         for agent in world.agents:
             if self.skill_dist == "none":
                 sampled_skill = 1
@@ -251,6 +253,11 @@ class Build(BaseComponent):
 
             self.sampled_skills[agent.idx] = sampled_skill
 
+        if not (self.build_skill == None):
+            #overwrite the thing
+            for i, agent in enumerate(world.agents):
+                agent.state["build_skill"]= self.build_skill[i]
+                agent.state["build_payment"] =self.build_payment[i]
         self.builds = []
 
     def get_dense_log(self):
