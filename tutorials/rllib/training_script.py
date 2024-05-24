@@ -305,13 +305,16 @@ def log_wandb(trainer, result):
         "metrics/update_time_ms": result['info']['update_time_ms'],
     }
 
-    for i, agent in enumerate(trainer.workers.local_worker().env.env.world.agents):
-        for k, v in  agent.state.items():
-            log_dict[f'agent{i}/' + k] = v
+    remote_envs = remote.get_trainer_envs(trainer)
 
-    maps = trainer.workers.local_worker().env.env.world.maps
-    log_dict["num_houses"] = np.sum(maps.get("House"))
-    log_dict["num_trees"] = np.sum(maps.get("Wood"))
+    for ei, ee in remote_envs.items():
+        for i, agent in enumerate(ee.env.world.agents):
+            for k, v in  agent.state.items():
+                log_dict[f'env{ei}/agent{i}/' + k] = v
+
+        maps = ee.env.world.maps
+        log_dict[f"env{ei}/num_houses"] = np.sum(maps.get("House"))
+        log_dict[f"env{ei}/num_trees"] = np.sum(maps.get("Wood"))
 
     wandb.log(log_dict)
 
@@ -365,7 +368,7 @@ if __name__ == "__main__":
 
         # Training
         result = trainer.train()
-        log_wandb(result)
+        log_wandb(trainer, result)
 
         # === Counters++ ===
         num_parallel_episodes_done = result["episodes_total"]
