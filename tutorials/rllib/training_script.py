@@ -307,14 +307,14 @@ def log_wandb(trainer, result):
 
     remote_envs = remote.get_trainer_envs(trainer)
 
-    for ei, ee in remote_envs.items():
-        for i, agent in enumerate(ee.env.world.agents):
-            for k, v in  agent.state.items():
-                log_dict[f'env{ei}/agent{i}/' + k] = v
+    ee = remote_envs.values()[0]
+    for i, agent in enumerate(ee.env.world.agents):
+        for k, v in  agent.state.items():
+            log_dict[f'env/agent{i}/' + k] = v
 
-        maps = ee.env.world.maps
-        log_dict[f"env{ei}/num_houses"] = np.sum(maps.get("House"))
-        log_dict[f"env{ei}/num_trees"] = np.sum(maps.get("Wood"))
+    maps = ee.env.world.maps
+    log_dict[f"env/num_houses"] = np.sum(maps.get("House"))
+    log_dict[f"env/num_trees"] = np.sum(maps.get("Wood"))
 
     wandb.log(log_dict)
 
