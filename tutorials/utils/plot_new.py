@@ -470,19 +470,26 @@ def breakdown(log, remap_key=None):
         accum_reward += x['p']
         list_reward.append(accum_reward)
     ax.plot(list_reward, label='planner', color='pink', )
-    ax.set_title("Rewards - Net Utility/Social outcome")
+    ax.set_title("Rewards")
     ax.legend()
     ax.grid(b=True)
 
     ax = axes[3][0]
-    trees_cut = [0]
+    trees_cut = {}
+    for i in range(n):
+        trees_cut[i] = [0]
+
     for x in log['Gather']:
-        cur_wood = 0
+        for i in range(n):
+            trees_cut[i].append(trees_cut[i][-1])
+
         for event in x:
             if event['resource'] == 'Wood':
-                cur_wood += 1
-        trees_cut.append(cur_wood + trees_cut[-1])
-    ax.plot(trees_cut[1:])
+                gather_idx = int(event['agent'])
+                trees_cut[gather_idx][-1] += 1
+
+    for i in range(n):
+        ax.plot(trees_cut[i][1:], label=i, color=cmap(i))
     ax.set_title("Trees cut")
     ax.legend()
     ax.grid(b=True)
@@ -494,13 +501,13 @@ def breakdown(log, remap_key=None):
     for x in log["Build"]:
         for i in range(n):
             house_built[i].append(house_built[i][-1])
-
         for build_event in x:
             builder_idx = int(build_event['builder'])
             house_built[builder_idx][-1] += 1
+    
     for i in range(n):
         ax.plot(house_built[i][1:], label=i, color=cmap(i))
-    ax.set_title("House built")
+    ax.set_title("Houses built")
     ax.legend()
     ax.grid(b=True)
 
