@@ -995,7 +995,6 @@ class PeriodicBracketTax(BaseComponent):
         # increment timestep.
         self.tax_cycle_pos += 1
 
-        print(self.curr_bracket_tax_rates )
 
     def generate_observations(self):
         """
@@ -1030,15 +1029,27 @@ class PeriodicBracketTax(BaseComponent):
             curr_marginal_rate = self.marginal_rate(
                 agent.total_endowment("Coin") - self.last_coin[i]
             )
+            
+            if self.tax_model == "random_fix_beginning":
+                obs[k] = dict(
+                    is_tax_day=is_tax_day,
+                    is_first_day=is_first_day,
+                    tax_phase=tax_phase,
+                    last_incomes=self._last_income_obs_sorted,
+                    curr_rates=self._curr_rates_obs,
+                    marginal_rate=curr_marginal_rate,
+                    all_taxes = np.reshape(self.stashed_brackets, (-1))
+                    )
+            else:
+                obs[k] = dict(
+                    is_tax_day=is_tax_day,
+                    is_first_day=is_first_day,
+                    tax_phase=tax_phase,
+                    last_incomes=self._last_income_obs_sorted,
+                    curr_rates=self._curr_rates_obs,
+                    marginal_rate=curr_marginal_rate,
+                )
 
-            obs[k] = dict(
-                is_tax_day=is_tax_day,
-                is_first_day=is_first_day,
-                tax_phase=tax_phase,
-                last_incomes=self._last_income_obs_sorted,
-                curr_rates=self._curr_rates_obs,
-                marginal_rate=curr_marginal_rate,
-            )
 
             obs["p" + k] = dict(
                 last_income=self._last_income_obs[i],

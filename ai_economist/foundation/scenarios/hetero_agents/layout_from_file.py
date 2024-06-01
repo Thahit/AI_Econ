@@ -81,7 +81,6 @@ class HeteroLayoutFromFile(BaseEnvironment):
         energy_warmup_method="decay",
         planner_reward_type="coin_eq_times_productivity",
         mixing_weight_gini_vs_coin=0.0,
-        #build_payment = None,
         **base_env_kwargs,
     ):
         super().__init__(*base_env_args, **base_env_kwargs)
