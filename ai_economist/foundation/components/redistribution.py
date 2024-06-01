@@ -7,6 +7,7 @@
 from copy import deepcopy
 
 import numpy as np
+import math
 
 from ai_economist.foundation.base.base_component import (
     BaseComponent,
@@ -92,6 +93,7 @@ class PeriodicBracketTax(BaseComponent):
             derived in https://www.nber.org/papers/w7628.
             "us-federal-single-filer-2018-scaled" uses US federal tax rates from 2018;
             "fixed-bracket-rates" uses the rates supplied in fixed_bracket_rates.
+            "random_fix_beginning" randomly generate tax brackets in beginning and use them sequentially
         period (int): Length of a tax period in environment timesteps. Taxes are
             updated at the start of each period and collected/redistributed at the
             end of each period. Must be > 0. Default is 100 timesteps.
@@ -167,12 +169,14 @@ class PeriodicBracketTax(BaseComponent):
             "us-federal-single-filer-2018-scaled",
             "saez",
             "fixed-bracket-rates",
+            "random_fix_beginning"
         ]
 
         # How many timesteps a tax period lasts.
         self.period = int(period)
         assert self.period > 0
 
+        self.num_brackets = math.ceil(self._episode_length/self.period)
         # Minimum marginal bracket rate
         self.rate_min = 0.0 if self.disable_taxes else float(rate_min)
         # Maximum marginal bracket rate
@@ -337,13 +341,21 @@ class PeriodicBracketTax(BaseComponent):
         else:
             self._planner_tax_val_dict = {}
         self._planner_masks = None
-
+        
+        if self.tax_model == "random_fix_beginning":
+            self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_brackets ,self.n_brackets))
+            self.tax_id = 0
+        else:
+            self.stashed_brackets = None
+        
         # === placeholders ===
         self._curr_rates_obs = np.array(self.curr_marginal_rates)
         self._last_income_obs = np.array(self.last_income) / self.period
         self._last_income_obs_sorted = self._last_income_obs[
             np.argsort(self._last_income_obs)
         ]
+
+        
 
     # Methods for getting/setting marginal tax rates
     # ----------------------------------------------
@@ -404,6 +416,10 @@ class PeriodicBracketTax(BaseComponent):
                 np.array(self.us_federal_single_filer_2018_scaled), self.curr_rate_max
             )
         elif self.tax_model == "saez":
+            marginal_tax_bracket_rates = np.minimum(
+                self.curr_bracket_tax_rates, self.curr_rate_max
+            )
+        elif self.tax_model == "random_fix_beginning":
             marginal_tax_bracket_rates = np.minimum(
                 self.curr_bracket_tax_rates, self.curr_rate_max
             )
@@ -548,6 +564,10 @@ class PeriodicBracketTax(BaseComponent):
         self._global_saez_buffer = []
         self._additions_this_episode = 0
         self._reached_min_samples = False
+
+    def reset_multiple_tax_brackets(self):# when  random_fix_beginning
+        self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_brackets ,self.n_brackets))
+        self.tax_id = 0
 
     def estimate_uniform_income_elasticity(
         self,
@@ -951,11 +971,15 @@ class PeriodicBracketTax(BaseComponent):
 
         # 1. On the first day of a new tax period: Set up the taxes for this period.
         if self.tax_cycle_pos == 1:
-            if self.tax_model == "model_wrapper":
+            if self.tax_model == "random_fix_beginning":
+                self.curr_bracket_tax_rates = self.stashed_brackets[self.tax_id]
+                self.tax_id += 1
+            elif self.tax_model == "model_wrapper":
                 self.set_new_period_rates_model()
 
-            if self.tax_model == "saez":
+            elif self.tax_model == "saez":
                 self.compute_and_set_new_period_rates_from_saez_formula()
+            
 
             # (cache this for faster obs generation)
             self._curr_rates_obs = np.array(self.curr_marginal_rates)
@@ -970,6 +994,8 @@ class PeriodicBracketTax(BaseComponent):
 
         # increment timestep.
         self.tax_cycle_pos += 1
+
+        print(self.curr_bracket_tax_rates )
 
     def generate_observations(self):
         """
@@ -1135,8 +1161,13 @@ class PeriodicBracketTax(BaseComponent):
         self._occupancy = {"{:03d}".format(int(r)): 0 for r in self.bracket_cutoffs}
         self._planner_masks = None
 
-        if self.tax_model == "saez":
+        if self.tax_model == "random_fix_beginning":
+            #randomize new brackets
+            self.reset_multiple_tax_brackets()
+
+        elif self.tax_model == "saez":
             self.curr_bracket_tax_rates = np.array(self.running_avg_tax_rates)
+        
 
     def get_metrics(self):
         """
