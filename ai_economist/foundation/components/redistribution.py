@@ -5,6 +5,7 @@
 # or https://opensource.org/licenses/BSD-3-Clause
 
 from copy import deepcopy
+from collections import deque
 
 import numpy as np
 import math
@@ -125,6 +126,8 @@ class PeriodicBracketTax(BaseComponent):
         saez_fixed_elas (float, optional): If supplied, this value will be used as
             the elasticity estimate when computing tax rates using the Saez formula.
             If not given (default), elasticity will be estimated empirically.
+        monte_carlo_window_size(int, optional) size of the window where the last tax brackets 
+            get saved and the avg. tax brackets are treturned to the followers
         tax_annealing_schedule (list, optional): A length-2 list of
             [tax_annealing_warmup, tax_annealing_slope] describing the tax annealing
             schedule. See annealed_tax_mask function for details. Default behavior is
@@ -152,6 +155,8 @@ class PeriodicBracketTax(BaseComponent):
         fixed_bracket_rates=None,
         pareto_weight_type="inverse_income",
         saez_fixed_elas=None,
+        monte_carlo_window_size = None,
+        rand_instead = False,
         tax_annealing_schedule=None,
         **base_component_kwargs
     ):
@@ -171,12 +176,13 @@ class PeriodicBracketTax(BaseComponent):
             "fixed-bracket-rates",
             "random_fix_beginning"
         ]
-
+        self.rand_instead = rand_instead
+        print("tax model used: ", self.tax_model)
         # How many timesteps a tax period lasts.
         self.period = int(period)
         assert self.period > 0
 
-        self.num_brackets = math.ceil(self._episode_length/self.period)
+        self.num_tax_periods = math.ceil(self._episode_length/self.period)
         # Minimum marginal bracket rate
         self.rate_min = 0.0 if self.disable_taxes else float(rate_min)
         # Maximum marginal bracket rate
@@ -342,8 +348,8 @@ class PeriodicBracketTax(BaseComponent):
             self._planner_tax_val_dict = {}
         self._planner_masks = None
         
-        if self.tax_model == "random_fix_beginning":
-            self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_brackets ,self.n_brackets))
+        if self.tax_model == "random_fix_beginning" or self.rand_instead:
+            self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_tax_periods ,self.n_brackets))
             self.tax_id = 0
         else:
             self.stashed_brackets = None
@@ -355,7 +361,16 @@ class PeriodicBracketTax(BaseComponent):
             np.argsort(self._last_income_obs)
         ]
 
-        
+        self.monte_carlo_window_size = monte_carlo_window_size
+        if monte_carlo_window_size:
+            self.monte_carlo_window_size = int(monte_carlo_window_size)
+            assert self.monte_carlo_window_size > 0
+            assert self.tax_model ==  "model_wrapper"
+            self.tax_history = np.zeros((self.monte_carlo_window_size, self.num_tax_periods ,self.n_brackets))
+            self.curr_brackets = np.zeros((1, self.num_tax_periods, self.n_brackets))
+            self.curr_brackets_id = 0
+            # in stead of a history, we could also have a moving avg.
+            print("MC window of size: ", self.monte_carlo_window_size)
 
     # Methods for getting/setting marginal tax rates
     # ----------------------------------------------
@@ -408,18 +423,18 @@ class PeriodicBracketTax(BaseComponent):
     @property
     def curr_marginal_rates(self):
         """The current set of marginal tax bracket rates."""
-        if self.use_discretized_rates:
+        if self.tax_model == "random_fix_beginning" or self.rand_instead:
+            marginal_tax_bracket_rates = np.minimum(
+                self.curr_bracket_tax_rates, self.curr_rate_max
+            )
+        elif self.use_discretized_rates:
             return self.disc_rates[self.curr_rate_indices]
 
-        if self.tax_model == "us-federal-single-filer-2018-scaled":
+        elif self.tax_model == "us-federal-single-filer-2018-scaled":
             marginal_tax_bracket_rates = np.minimum(
                 np.array(self.us_federal_single_filer_2018_scaled), self.curr_rate_max
             )
         elif self.tax_model == "saez":
-            marginal_tax_bracket_rates = np.minimum(
-                self.curr_bracket_tax_rates, self.curr_rate_max
-            )
-        elif self.tax_model == "random_fix_beginning":
             marginal_tax_bracket_rates = np.minimum(
                 self.curr_bracket_tax_rates, self.curr_rate_max
             )
@@ -566,7 +581,7 @@ class PeriodicBracketTax(BaseComponent):
         self._reached_min_samples = False
 
     def reset_multiple_tax_brackets(self):# when  random_fix_beginning
-        self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_brackets ,self.n_brackets))
+        self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_tax_periods ,self.n_brackets))
         self.tax_id = 0
 
     def estimate_uniform_income_elasticity(
@@ -971,7 +986,7 @@ class PeriodicBracketTax(BaseComponent):
 
         # 1. On the first day of a new tax period: Set up the taxes for this period.
         if self.tax_cycle_pos == 1:
-            if self.tax_model == "random_fix_beginning":
+            if self.tax_model == "random_fix_beginning" or self.rand_instead:
                 self.curr_bracket_tax_rates = self.stashed_brackets[self.tax_id]
                 self.tax_id += 1
             elif self.tax_model == "model_wrapper":
@@ -983,6 +998,10 @@ class PeriodicBracketTax(BaseComponent):
 
             # (cache this for faster obs generation)
             self._curr_rates_obs = np.array(self.curr_marginal_rates)
+
+            if self.monte_carlo_window_size:# save taxes for window
+                self.curr_brackets[0, self.curr_brackets_id] = self.curr_marginal_rates
+                self.curr_brackets_id += 1
 
         # 2. On the last day of the tax period: Get $-taxes AND update agent endowments.
         if self.tax_cycle_pos >= self.period:
@@ -1030,7 +1049,7 @@ class PeriodicBracketTax(BaseComponent):
                 agent.total_endowment("Coin") - self.last_coin[i]
             )
             
-            if self.tax_model == "random_fix_beginning":
+            if self.tax_model == "random_fix_beginning" or self.rand_instead:
                 obs[k] = dict(
                     is_tax_day=is_tax_day,
                     is_first_day=is_first_day,
@@ -1039,6 +1058,16 @@ class PeriodicBracketTax(BaseComponent):
                     curr_rates=self._curr_rates_obs,
                     marginal_rate=curr_marginal_rate,
                     all_taxes = np.reshape(self.stashed_brackets, (-1))
+                    )
+            elif self.monte_carlo_window_size:
+                obs[k] = dict(
+                    is_tax_day=is_tax_day,
+                    is_first_day=is_first_day,
+                    tax_phase=tax_phase,
+                    last_incomes=self._last_income_obs_sorted,
+                    curr_rates=self._curr_rates_obs,
+                    marginal_rate=curr_marginal_rate,
+                    all_taxes = np.reshape(np.mean(self.tax_history, axis=0), (-1))
                     )
             else:
                 obs[k] = dict(
@@ -1172,12 +1201,15 @@ class PeriodicBracketTax(BaseComponent):
         self._occupancy = {"{:03d}".format(int(r)): 0 for r in self.bracket_cutoffs}
         self._planner_masks = None
 
-        if self.tax_model == "random_fix_beginning":
+        if self.tax_model == "random_fix_beginning" or self.rand_instead:
             #randomize new brackets
             self.reset_multiple_tax_brackets()
 
         elif self.tax_model == "saez":
             self.curr_bracket_tax_rates = np.array(self.running_avg_tax_rates)
+        elif self.monte_carlo_window_size:
+            self.tax_history = np.concatenate((self.tax_history[1:], np.array(self.curr_brackets)))# should be same size
+            self.curr_brackets_id = 0
         
 
     def get_metrics(self):
