@@ -34,7 +34,7 @@ env:
       - .640
       - .780
       - .22
-      build_payment: #new
+      build_payment": #new
       - 12.
       - 21.
       - 15.
@@ -47,7 +47,7 @@ env:
       collect_labor: 1
       move_labor: 1
       skill_dist: pareto
-      bonus_gather_prob: #new
+      bonus_gather_prob": #new
       - .3
       - .2
       - .1
@@ -59,7 +59,6 @@ env:
       - -100
       - 0.001
       usd_scaling: 1000
-      rand_instead: true    # new
   dense_log_frequency: 20
   energy_cost: 0.21
   energy_warmup_constant: 10000
@@ -109,14 +108,8 @@ planner_policy:
   lr: 0.0003
   lr_schedule: null
   model:
-    custom_model: keras_conv_lstm
-    custom_options:
-      fc_dim: 256
-      idx_emb_dim: 4
-      input_emb_vocab: 100
-      lstm_cell_size: 256
-      num_conv: 2
-      num_fc: 2
+    custom_model: random
+    custom_options: {}
     max_seq_len: 25
   use_gae: true
   vf_clip_param: 50.0

@@ -53,28 +53,30 @@ env:
       - .1
   - PeriodicBracketTax:
       bracket_spacing: us-federal
-      disable_taxes: true
+      disable_taxes: false
       period: 250
+      rate_disc: 0.05
       tax_annealing_schedule:
       - -100
       - 0.001
+      tax_model: model_wrapper
+      monte_carlo_window_size: 5 # new
+      #rand_instead: true
       usd_scaling: 1000
-      rand_instead: true    # new
   dense_log_frequency: 20
   energy_cost: 0.21
-  energy_warmup_constant: 10000
-  energy_warmup_method: auto
+  energy_warmup_constant: 0
   env_layout_file: quadrant_25x25_20each_30clump.txt
   env_weighting:
-  - 0.
-  - 0.
-  - -0.
+  - 0.002
+  - 0.001
+  - -0.001
   episode_length: 750
   equ_weighting:
-  - -0.
-  - 0.
-  - 0.
-  fixed_four_skill_and_loc: false #changed
+  - -0.04
+  - 0.01
+  - 0.08
+  fixed_four_skill_and_loc: false # changed
   flatten_masks: true
   flatten_observations: true
   isoelastic_eta: 0.23
@@ -85,28 +87,33 @@ env:
   planner_gets_spatial_info: false
   planner_reward_type: coin_eq_times_productivity
   scenario_name: layout_from_file/hetero_agents
-  starting_agent_coin: 0
+  starting_agent_coin: 10
   world_size:
   - 25
   - 25
 general:
-  ckpt_frequency_steps: 750000
+  actor_frozen: True #new
+  ckpt_frequency_steps: 10000000
   cpus: 10
-  episodes: 31250
+  episodes: 4000000 #maybe change
   gpus: 1
-  restore_tf_weights_agents: ''
+  restore_tf_weights_agents: change pls
   restore_tf_weights_planner: ''
-  train_planner: false
+  train_planner: true
 planner_policy:
   clip_param: 0.3
-  entropy_coeff: 0.025
-  entropy_coeff_schedule: null
+  entropy_coeff: 0.125
+  entropy_coeff_schedule:
+  - - 0
+    - 2.0
+  - - 50000000
+    - 0.125
   gamma: 0.998
   grad_clip: 10.0
   kl_coeff: 0.0
   kl_target: 0.01
   lambda: 0.98
-  lr: 0.0003
+  lr: 0.0001
   lr_schedule: null
   model:
     custom_model: keras_conv_lstm
@@ -153,4 +160,3 @@ trainer:
     log_device_placement: false
   train_batch_size: 3000
   remote_worker_envs: False
-note: phase1
