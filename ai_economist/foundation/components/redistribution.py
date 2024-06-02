@@ -94,7 +94,6 @@ class PeriodicBracketTax(BaseComponent):
             derived in https://www.nber.org/papers/w7628.
             "us-federal-single-filer-2018-scaled" uses US federal tax rates from 2018;
             "fixed-bracket-rates" uses the rates supplied in fixed_bracket_rates.
-            "random_fix_beginning" randomly generate tax brackets in beginning and use them sequentially
         period (int): Length of a tax period in environment timesteps. Taxes are
             updated at the start of each period and collected/redistributed at the
             end of each period. Must be > 0. Default is 100 timesteps.
@@ -128,6 +127,8 @@ class PeriodicBracketTax(BaseComponent):
             If not given (default), elasticity will be estimated empirically.
         monte_carlo_window_size(int, optional) size of the window where the last tax brackets 
             get saved and the avg. tax brackets are treturned to the followers
+        rand_instead(bool, optional) randomly generate tax brackets in beginning and 
+            use them sequentially instead of using model, need model_wrapper as tax model
         tax_annealing_schedule (list, optional): A length-2 list of
             [tax_annealing_warmup, tax_annealing_slope] describing the tax annealing
             schedule. See annealed_tax_mask function for details. Default behavior is
@@ -174,7 +175,6 @@ class PeriodicBracketTax(BaseComponent):
             "us-federal-single-filer-2018-scaled",
             "saez",
             "fixed-bracket-rates",
-            "random_fix_beginning"
         ]
         self.rand_instead = rand_instead
         print("tax model used: ", self.tax_model)
@@ -348,7 +348,7 @@ class PeriodicBracketTax(BaseComponent):
             self._planner_tax_val_dict = {}
         self._planner_masks = None
         
-        if self.tax_model == "random_fix_beginning" or self.rand_instead:
+        if self.rand_instead:
             self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_tax_periods ,self.n_brackets))
             self.tax_id = 0
         else:
@@ -423,7 +423,7 @@ class PeriodicBracketTax(BaseComponent):
     @property
     def curr_marginal_rates(self):
         """The current set of marginal tax bracket rates."""
-        if self.tax_model == "random_fix_beginning" or self.rand_instead:
+        if self.rand_instead:
             marginal_tax_bracket_rates = np.minimum(
                 self.curr_bracket_tax_rates, self.curr_rate_max
             )
@@ -580,7 +580,7 @@ class PeriodicBracketTax(BaseComponent):
         self._additions_this_episode = 0
         self._reached_min_samples = False
 
-    def reset_multiple_tax_brackets(self):# when  random_fix_beginning
+    def reset_multiple_tax_brackets(self):
         self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_tax_periods ,self.n_brackets))
         self.tax_id = 0
 
@@ -986,7 +986,7 @@ class PeriodicBracketTax(BaseComponent):
 
         # 1. On the first day of a new tax period: Set up the taxes for this period.
         if self.tax_cycle_pos == 1:
-            if self.tax_model == "random_fix_beginning" or self.rand_instead:
+            if self.rand_instead:
                 self.curr_bracket_tax_rates = self.stashed_brackets[self.tax_id]
                 self.tax_id += 1
             elif self.tax_model == "model_wrapper":
@@ -1049,7 +1049,7 @@ class PeriodicBracketTax(BaseComponent):
                 agent.total_endowment("Coin") - self.last_coin[i]
             )
             
-            if self.tax_model == "random_fix_beginning" or self.rand_instead:
+            if self.rand_instead:
                 obs[k] = dict(
                     is_tax_day=is_tax_day,
                     is_first_day=is_first_day,
@@ -1201,7 +1201,7 @@ class PeriodicBracketTax(BaseComponent):
         self._occupancy = {"{:03d}".format(int(r)): 0 for r in self.bracket_cutoffs}
         self._planner_masks = None
 
-        if self.tax_model == "random_fix_beginning" or self.rand_instead:
+        if self.rand_instead:
             #randomize new brackets
             self.reset_multiple_tax_brackets()
 
