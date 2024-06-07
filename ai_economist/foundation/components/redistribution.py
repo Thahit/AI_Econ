@@ -133,6 +133,7 @@ class PeriodicBracketTax(BaseComponent):
             [tax_annealing_warmup, tax_annealing_slope] describing the tax annealing
             schedule. See annealed_tax_mask function for details. Default behavior is
             no tax annealing.
+        tax_rules (list, optional): list of tax brackets a planner can choose from.
     """
 
     name = "PeriodicBracketTax"
@@ -159,6 +160,7 @@ class PeriodicBracketTax(BaseComponent):
         monte_carlo_window_size = None,
         rand_instead = False,
         tax_annealing_schedule=None,
+        tax_rules=None,
         **base_component_kwargs
     ):
         super().__init__(*base_component_args, **base_component_kwargs)
@@ -339,11 +341,29 @@ class PeriodicBracketTax(BaseComponent):
             self._annealing_warmup = None
             self._annealing_slope = None
 
+        # select rules
+        self.tax_rules = tax_rules
+        self.have_rules = tax_rules != None
+        if self.tax_rules != None:
+            assert isinstance(self.tax_rules, list)
+            assert len(tax_rules) > 1
+            assert self.tax_model == "model_wrapper"
+            self.chosen_rule = 0
+            for br in tax_rules:
+                assert self.n_brackets == len(br)# correct size
+            assert np.min(tax_rules) >= 0
+            assert np.max(tax_rules) <= 1
+            self.tax_rules = np.array(tax_rules)
+        
         if self.tax_model == "model_wrapper" and not self.disable_taxes:
             planner_action_tuples = self.get_n_actions("BasicPlanner")
-            self._planner_tax_val_dict = {
-                k: self.disc_rates for k, v in planner_action_tuples
-            }
+            if not self.have_rules:
+                self._planner_tax_val_dict = {
+                    k: self.disc_rates for k, v in planner_action_tuples
+                }
+            else:
+                self._planner_tax_val_dict = {"Rules": [i for i in range(len(self.tax_rules))]}
+
         else:
             self._planner_tax_val_dict = {}
         self._planner_masks = None
@@ -371,6 +391,7 @@ class PeriodicBracketTax(BaseComponent):
             self.curr_brackets_id = 0
             # in stead of a history, we could also have a moving avg.
             print("MC window of size: ", self.monte_carlo_window_size)
+
 
     # Methods for getting/setting marginal tax rates
     # ----------------------------------------------
@@ -427,6 +448,8 @@ class PeriodicBracketTax(BaseComponent):
             marginal_tax_bracket_rates = np.minimum(
                 self.curr_bracket_tax_rates, self.curr_rate_max
             )
+        elif self.have_rules:
+            marginal_tax_bracket_rates = self.tax_rules[self.chosen_rule] 
         elif self.use_discretized_rates:
             return self.disc_rates[self.curr_rate_indices]
 
@@ -453,16 +476,22 @@ class PeriodicBracketTax(BaseComponent):
             return
 
         # AI version
-        for i, bracket in enumerate(self.bracket_cutoffs):
-            planner_action = self.world.planner.get_component_action(
-                self.name, "TaxIndexBracket_{:03d}".format(int(bracket))
-            )
-            if planner_action == 0:
-                pass
-            elif planner_action <= self.n_disc_rates:
-                self.curr_rate_indices[i] = int(planner_action - 1)
-            else:
-                raise ValueError
+        if self.have_rules:
+            action =self.world.planner.get_component_action(
+                    self.name, "Rules"
+                )
+            self.chosen_rule = action
+        else:
+            for i, bracket in enumerate(self.bracket_cutoffs):
+                planner_action = self.world.planner.get_component_action(
+                    self.name, "TaxIndexBracket_{:03d}".format(int(bracket))
+                )
+                if planner_action == 0:
+                    pass
+                elif planner_action <= self.n_disc_rates:
+                    self.curr_rate_indices[i] = int(planner_action - 1)
+                else:
+                    raise ValueError
 
     # ------- Saez formula
     def compute_and_set_new_period_rates_from_saez_formula(
@@ -963,12 +992,15 @@ class PeriodicBracketTax(BaseComponent):
         # Only the planner takes actions through this component.
         if agent_cls_name == "BasicPlanner":
             if self.tax_model == "model_wrapper" and not self.disable_taxes:
-                # For every bracket, the planner can select one of the discretized
-                # tax rates.
-                return [
-                    ("TaxIndexBracket_{:03d}".format(int(r)), self.n_disc_rates)
-                    for r in self.bracket_cutoffs
-                ]
+                if self.have_rules:
+                    return [("Rules", len(self.tax_rules))]
+                else:
+                    # For every bracket, the planner can select one of the discretized
+                    # tax rates.
+                    return [
+                        ("TaxIndexBracket_{:03d}".format(int(r)), self.n_disc_rates)
+                        for r in self.bracket_cutoffs
+                    ]
 
         # Return 0 (no added actions) if the other conditions aren't met.
         return 0
