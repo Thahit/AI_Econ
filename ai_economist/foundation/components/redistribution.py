@@ -128,7 +128,8 @@ class PeriodicBracketTax(BaseComponent):
         monte_carlo_window_size(int, optional) size of the window where the last tax brackets 
             get saved and the avg. tax brackets are treturned to the followers
         rand_instead(bool, optional) randomly generate tax brackets in beginning and 
-            use them sequentially instead of using model, need model_wrapper as tax model
+            use them sequentially instead of using model, need model_wrapper as tax model.
+            If tax_rules is not empty, you instead select rules from this list.
         tax_annealing_schedule (list, optional): A length-2 list of
             [tax_annealing_warmup, tax_annealing_slope] describing the tax annealing
             schedule. See annealed_tax_mask function for details. Default behavior is
@@ -369,8 +370,9 @@ class PeriodicBracketTax(BaseComponent):
         self._planner_masks = None
         
         if self.rand_instead:
-            self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_tax_periods ,self.n_brackets))
-            self.tax_id = 0
+            self.init_rand()
+
+
         else:
             self.stashed_brackets = None
         
@@ -470,6 +472,17 @@ class PeriodicBracketTax(BaseComponent):
 
         return marginal_tax_bracket_rates
 
+    def init_rand(self):
+        if self.have_rules:
+            choices = np.random.choice(len(self.tax_rules), size = (self.num_tax_periods),
+                                                        replace=True)
+            self.stashed_brackets =self.tax_rules[choices]
+        else:
+            self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, 
+                                                        (self.num_tax_periods ,self.n_brackets))
+        self.tax_id = 0
+        #print("Generated Brackets: \n",  self.stashed_brackets)
+    
     def set_new_period_rates_model(self):
         """Update taxes using actions from the tax model."""
         if self.disable_taxes:
@@ -610,8 +623,7 @@ class PeriodicBracketTax(BaseComponent):
         self._reached_min_samples = False
 
     def reset_multiple_tax_brackets(self):
-        self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, (self.num_tax_periods ,self.n_brackets))
-        self.tax_id = 0
+        self.init_rand()
 
     def estimate_uniform_income_elasticity(
         self,
