@@ -135,6 +135,8 @@ class PeriodicBracketTax(BaseComponent):
             schedule. See annealed_tax_mask function for details. Default behavior is
             no tax annealing.
         tax_rules (list, optional): list of tax brackets a planner can choose from.
+        shifts (list, optional): list of shifts, used to shift the tax rules, to get 
+            more variety/more modelling power out of the policy
     """
 
     name = "PeriodicBracketTax"
@@ -162,6 +164,7 @@ class PeriodicBracketTax(BaseComponent):
         rand_instead = False,
         tax_annealing_schedule=None,
         tax_rules=None,
+        shifts=None,
         **base_component_kwargs
     ):
         super().__init__(*base_component_args, **base_component_kwargs)
@@ -345,17 +348,27 @@ class PeriodicBracketTax(BaseComponent):
         # select rules
         self.tax_rules = tax_rules
         self.have_rules = tax_rules != None
-        if self.tax_rules != None:
+        if self.have_rules:
             assert isinstance(self.tax_rules, list)
             assert len(tax_rules) > 1
             assert self.tax_model == "model_wrapper"
             self.chosen_rule = 0
             for br in tax_rules:
                 assert self.n_brackets == len(br)# correct size
-            assert np.min(tax_rules) >= 0
-            assert np.max(tax_rules) <= 1
+            assert np.min(tax_rules) >= self.rate_min
+            assert np.max(tax_rules) <= self.rate_max
             self.tax_rules = np.array(tax_rules)
         
+        self.shifts = shifts
+        self.has_shifts = shifts != None
+        if self.has_shifts:
+            assert self.have_rules# shift what?
+            assert 0. in shifts# 0 should probably be in the list
+            assert np.min(shifts) >= -1
+            assert np.max(shifts) <= 1
+            self.chosen_shift = 0
+            self.shifts = np.array(shifts)
+
         if self.tax_model == "model_wrapper" and not self.disable_taxes:
             planner_action_tuples = self.get_n_actions("BasicPlanner")
             if not self.have_rules:
@@ -364,6 +377,8 @@ class PeriodicBracketTax(BaseComponent):
                 }
             else:
                 self._planner_tax_val_dict = {"Rules": [i for i in range(len(self.tax_rules))]}
+                if self.has_shifts:
+                    self._planner_tax_val_dict["shifts"] = self.shifts
 
         else:
             self._planner_tax_val_dict = {}
@@ -446,12 +461,16 @@ class PeriodicBracketTax(BaseComponent):
     @property
     def curr_marginal_rates(self):
         """The current set of marginal tax bracket rates."""
-        if self.rand_instead:
+        if self.rand_instead:# can also be with rule set
             marginal_tax_bracket_rates = np.minimum(
                 self.curr_bracket_tax_rates, self.curr_rate_max
             )
         elif self.have_rules:
-            marginal_tax_bracket_rates = self.tax_rules[self.chosen_rule] 
+            marginal_tax_bracket_rates = np.copy(self.tax_rules[self.chosen_rule])
+            if self.has_shifts:
+                marginal_tax_bracket_rates += self.shifts[self.chosen_shift]
+                marginal_tax_bracket_rates = np.clip(marginal_tax_bracket_rates, a_min=self.rate_min, a_max=self.rate_max)
+
         elif self.use_discretized_rates:
             return self.disc_rates[self.curr_rate_indices]
 
@@ -476,12 +495,18 @@ class PeriodicBracketTax(BaseComponent):
         if self.have_rules:
             choices = np.random.choice(len(self.tax_rules), size = (self.num_tax_periods),
                                                         replace=True)
-            self.stashed_brackets =self.tax_rules[choices]
+            self.stashed_brackets =np.copy(self.tax_rules[choices])
+            if self.has_shifts:
+                shifts = np.random.choice(self.shifts, size = (self.num_tax_periods, 1),
+                                        replace=True)
+                self.stashed_brackets += shifts
+                self.stashed_brackets  = np.clip(self.stashed_brackets, a_min=self.rate_min, a_max=self.rate_max)
+
         else:
             self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, 
                                                         (self.num_tax_periods ,self.n_brackets))
         self.tax_id = 0
-        #print("Generated Brackets: \n",  self.stashed_brackets)
+        print("Generated Brackets: \n",  self.stashed_brackets)
     
     def set_new_period_rates_model(self):
         """Update taxes using actions from the tax model."""
@@ -494,6 +519,10 @@ class PeriodicBracketTax(BaseComponent):
                     self.name, "Rules"
                 )
             self.chosen_rule = action
+            if self.has_shifts:
+                self.chosen_shift =self.world.planner.get_component_action(
+                    self.name, "shift"
+                )
         else:
             for i, bracket in enumerate(self.bracket_cutoffs):
                 planner_action = self.world.planner.get_component_action(
@@ -1005,7 +1034,10 @@ class PeriodicBracketTax(BaseComponent):
         if agent_cls_name == "BasicPlanner":
             if self.tax_model == "model_wrapper" and not self.disable_taxes:
                 if self.have_rules:
-                    return [("Rules", len(self.tax_rules))]
+                    action_list = [("Rules", len(self.tax_rules))]
+                    if self.has_shifts:
+                        action_list.append(("shifts", len(self.shifts))) 
+                    return action_list
                 else:
                     # For every bracket, the planner can select one of the discretized
                     # tax rates.
