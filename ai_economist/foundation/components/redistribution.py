@@ -387,7 +387,6 @@ class PeriodicBracketTax(BaseComponent):
         if self.rand_instead:
             self.init_rand()
 
-
         else:
             self.stashed_brackets = None
         
@@ -506,7 +505,7 @@ class PeriodicBracketTax(BaseComponent):
             self.stashed_brackets = np.random.uniform(self.rate_min, self.rate_max, 
                                                         (self.num_tax_periods ,self.n_brackets))
         self.tax_id = 0
-        print("Generated Brackets: \n",  self.stashed_brackets)
+        #print("Generated Brackets: \n",  self.stashed_brackets)
     
     def set_new_period_rates_model(self):
         """Update taxes using actions from the tax model."""
@@ -521,7 +520,7 @@ class PeriodicBracketTax(BaseComponent):
             self.chosen_rule = action
             if self.has_shifts:
                 self.chosen_shift =self.world.planner.get_component_action(
-                    self.name, "shift"
+                    self.name, "shifts"
                 )
         else:
             for i, bracket in enumerate(self.bracket_cutoffs):
