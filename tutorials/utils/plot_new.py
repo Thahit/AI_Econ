@@ -6,6 +6,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 
 from ai_economist.foundation import landmarks, resources
 from ai_economist.foundation.scenarios.utils import rewards, social_metrics
@@ -406,95 +407,59 @@ def breakdown(log, remap_key=None):
             ax.plot([-20, len(log["states"]) + 19], [0, 0], "w-")
             # ax.set_ylim([-10.2, 10.2]);
             ax.set_xlim([-20, len(log["states"]) + 19])
-            ax.grid(b=True)
+            # ax.grid(b=True)
             ax.set_facecolor([0.3, 0.3, 0.3])
 
 
-    # plot resources collection, income and labor
-    fig2, axes = plt.subplots(4, 2, figsize=(18, 18), sharey=False)
+    # plot resources collection, income, reward
+    fig2, axes = plt.subplots(2, 2, figsize=(16, 8), sharey=False)
+    plt.subplots_adjust(left=0.05, right=0.95, top=0.95, bottom=0.05)
+    # ==================== woods, stones, coins ====================
     for r, ax in zip(rs, [axes[0][0], axes[0][1], axes[1][0]]):
         for i in range(n):
             ax.plot([x[str(aidx[i])]["inventory"][r] + x[str(aidx[i])]["escrow"][r]
                     for x in log["states"]],
-                label=i,
-                color=cmap(i),
+                label=i, color=cmap(i), lw=2
             )
         ax.set_title(r)
         ax.legend()
-        ax.grid(b=True)
+        # ax.grid(b=True)
 
+    # ==================== rewards ====================
     ax = axes[1][1]
-    for i in range(n):
-        ax.plot([x[str(aidx[i])]["endogenous"]["Labor"] for x in log["states"]],
-            label=i,
-            color=cmap(i),
-        )
-    ax.set_title("Labor")
-    ax.legend()
-    ax.grid(b=True)
-
-    # plot tax brackets and utilities
-    # fig3, axes = plt.subplots(1, 2, figsize=(20, 4), sharey=False)
-    ax = axes[2][0]
-    list_BracketTax = list(log["actions"][0]['p'].keys())
-    tax_period = 250
-    len_log = len(log["actions"])
-    for bracket_name in list_BracketTax:
-        list_tax_rate = [log["actions"][0]['p'][bracket_name] if bracket_name in log["actions"][0]['p'].keys() else 0]
-        for idx, x in enumerate(log["actions"]):
-            rate = 0
-            if (idx+1) % tax_period == 0:
-                rate = x['p'][bracket_name] if bracket_name in x['p'].keys() else 0
-                if rate==0:
-                    rate = list_tax_rate[-1]
-                list_tax_rate.append(rate)
-        idx_x = [0] + list(range(tax_period-1, len_log, tax_period))
-        ax.plot(idx_x, list_tax_rate, label=bracket_name.split('.')[-1], )
-
-    ax.set_title("Tax Rate in Brackets")
-    ax.legend()
-    ax.grid(b=True)
-
-    ax = axes[2][1]
     for i in range(n):
         accum_reward = 0
         list_reward = []
         for x in log["rewards"]:
             accum_reward += x[str(aidx[i])]
             list_reward.append(accum_reward)
-        ax.plot(list_reward, label=i, color=cmap(i), )
-
+        ax.plot(list_reward, label=i, color=cmap(i), lw=2)
     accum_reward = 0
     list_reward = []
     for x in log["rewards"]:
         accum_reward += x['p']
         list_reward.append(accum_reward)
-    ax.plot(list_reward, label='planner', color='pink', )
+    ax.plot(list_reward, label='planner', color='pink', lw=2)
     ax.set_title("Rewards")
     ax.legend()
-    ax.grid(b=True)
+    # ax.grid(b=True)
 
-    ax = axes[3][0]
-    trees_cut = {}
+
+    # plot labor distribution
+    fig3, axes = plt.subplots(2, 2, figsize=(16, 8), sharey=False)
+    plt.subplots_adjust(left=0.05, right=0.95, top=0.95, bottom=0.05)
+    # ==================== labor ====================
+    ax = axes[0][0]
     for i in range(n):
-        trees_cut[i] = [0]
-
-    for x in log['Gather']:
-        for i in range(n):
-            trees_cut[i].append(trees_cut[i][-1])
-
-        for event in x:
-            if event['resource'] == 'Wood':
-                gather_idx = int(event['agent'])
-                trees_cut[gather_idx][-1] += 1
-
-    for i in range(n):
-        ax.plot(trees_cut[i][1:], label=i, color=cmap(i))
-    ax.set_title("Trees cut")
+        ax.plot([x[str(aidx[i])]["endogenous"]["Labor"] for x in log["states"]],
+            label=i, color=cmap(i), lw=2
+        )
+    ax.set_title("Labor")
     ax.legend()
-    ax.grid(b=True)
+    # ax.grid(b=True)
 
-    ax = axes[3][1]
+    # ==================== house built by agents ====================
+    ax = axes[0][1]
     house_built = {}
     for i in range(n):
         house_built[i] = [0]
@@ -502,16 +467,106 @@ def breakdown(log, remap_key=None):
         for i in range(n):
             house_built[i].append(house_built[i][-1])
         for build_event in x:
-            builder_idx = int(build_event['builder'])
-            house_built[builder_idx][-1] += 1
+            agent_idx = int(build_event['builder'])
+            house_built[agent_idx][-1] += 1
     
     for i in range(n):
-        ax.plot(house_built[i][1:], label=i, color=cmap(i))
-    ax.set_title("Houses built")
+        ax.plot(house_built[i][1:], label=i, color=cmap(i), lw=2)
+    ax.set_title("Houses Built")
     ax.legend()
-    ax.grid(b=True)
+    # ax.grid(b=True)
 
-    return (fig0, fig1, fig2), incomes, endows, c_trades, all_builds
+    
+    # ==================== trees cut by agents ====================
+    ax = axes[1][0]
+    trees_cut = {}
+    for i in range(n):
+        trees_cut[i] = [0]
+    # iterate for time step
+    for x in log['Gather']:
+        for i in range(n):
+            trees_cut[i].append(trees_cut[i][-1])
+        for gather_event in x:
+            if gather_event['resource'] == 'Wood':
+                agent_idx = int(gather_event['agent'])
+                gather_num = int(gather_event['n'])
+                trees_cut[agent_idx][-1] += gather_num
+
+    for i in range(n):
+        ax.plot(trees_cut[i][1:], label=i, color=cmap(i), lw=2)
+    ax.set_title("Trees Cut")
+    ax.legend()
+    # ax.grid(b=True)
+
+    # ==================== stone mined by agents ====================
+    ax = axes[1][1]
+    stone_mined = {}
+    for i in range(n):
+        stone_mined[i] = [0]
+    # iterate for time step
+    for x in log['Gather']:
+        for i in range(n):
+            stone_mined[i].append(stone_mined[i][-1])
+        for gather_event in x:
+            if gather_event['resource'] == 'Stone':
+                agent_idx = int(gather_event['agent'])
+                gather_num = int(gather_event['n'])
+                stone_mined[agent_idx][-1] += gather_num
+
+    for i in range(n):
+        ax.plot(stone_mined[i][1:], label=i, color=cmap(i), lw=2)
+    ax.set_title("Stone Mined")
+    ax.legend()
+    # ax.grid(b=True)
+
+    
+    
+
+
+    # ==================== tax brackets ====================
+    fig4, axes = plt.subplots(1, 1, figsize=(10, 6), sharey=False)
+    plt.subplots_adjust(left=0.08, right=0.92, top=0.92, bottom=0.08)
+    ax = axes
+
+    cutoff_list = []
+    cutoff_flag = False
+    rate_period = {}
+    period_cnt = 0
+    for x in log['PeriodicTax']:
+        if isinstance(x, dict):
+            if not cutoff_flag:
+                for tax_cutoff_val in x['cutoffs']:
+                    cutoff_list.append(tax_cutoff_val)
+                cutoff_flag = True
+            rate_list = []
+            for tax_rate in x['schedule']:
+                rate_list.append(tax_rate + period_cnt * 0.005)
+            rate_period[period_cnt] = rate_list
+            period_cnt += 1
+    
+    cutoffs_ext = cutoff_list + [cutoff_list[-1] + 50]
+
+    num_bracket = len(cutoff_list)
+    for i in range(num_bracket):
+        ax.vlines(cutoff_list[i], -0.95, 1.0, colors='b', linestyles='dashed', lw=1)
+
+    # tab20
+    cmap_tax = plt.get_cmap("tab20", period_cnt+1)
+    for period in range(period_cnt):
+        rate_list = rate_period[period]
+        ax.hlines(rate_list, cutoff_list, cutoffs_ext[1:], lw=2, 
+                colors=cmap_tax(period), label=f"Period {period}")
+
+    ax.set_title("Tax Rate in Brackets")
+    ax.set_xticks(cutoff_list[1:])
+    ax.set_xlim([cutoffs_ext[0], cutoffs_ext[-1]])
+    ax.set_ylim([-0.05, 1.0])
+    ax.set_xlabel("Tax Bracket")
+    ax.set_ylabel("Marginal Tax Rate(%)")
+    ax.legend()
+    # ax.grid(b=True)
+
+    return (fig0, fig1, fig2, fig3, fig4), incomes, endows, c_trades, all_builds
 
 
 def plot_for_each_n(y_fun, n, ax=None):
