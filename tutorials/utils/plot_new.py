@@ -536,23 +536,21 @@ def breakdown(log, remap_key=None):
         if isinstance(x, dict):
             if not cutoff_flag:
                 for tax_cutoff_val in x['cutoffs']:
-                    cutoff_list.append(tax_cutoff_val)
+                    cutoff_list.append(int(tax_cutoff_val))
                 cutoff_flag = True
             rate_list = []
             for tax_rate in x['schedule']:
-                rate_list.append(tax_rate + period_cnt * 0.005)
+                rate_list.append(tax_rate + period_cnt * 0.008)
             rate_period[period_cnt] = rate_list
             period_cnt += 1
     
     cutoffs_ext = cutoff_list + [cutoff_list[-1] + 50]
-
-    num_bracket = len(cutoff_list)
-    for i in range(num_bracket):
-        ax.vlines(cutoff_list[i], -0.95, 1.0, colors='b', linestyles='dashed', lw=1)
+    num_bracket = len(cutoff_list)   
 
     # tab20
-    cmap_tax = plt.get_cmap("tab20", period_cnt+1)
+    cmap_tax = plt.get_cmap("tab20", period_cnt)
     for period in range(period_cnt):
+        # ax.vlines(cutoff_list, -0.95, 1.0, colors='b', linestyles='dashed', lw=1)
         rate_list = rate_period[period]
         ax.hlines(rate_list, cutoff_list, cutoffs_ext[1:], lw=2, 
                 colors=cmap_tax(period), label=f"Period {period}")
